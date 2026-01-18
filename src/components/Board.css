@@ -1,0 +1,2 @@
+.board { position: relative; display: inline-block; }
+.board__grid { display: grid; gap: 8px; }
