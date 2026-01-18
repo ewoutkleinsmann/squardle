@@ -1,0 +1,3 @@
+.current-word { height: 40px; font-size: 1.5rem; font-weight: bold; display: flex; align-items: center; justify-content: center; }
+.current-word--empty { opacity: 0; }
+.current-word--valid { color: #4caf50; }
