@@ -1,4 +1,4 @@
-import { describe, it, expect, vi } from 'vitest';
+import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { Board } from '../Board';
 import { createGridFromLetters } from '../../game/grid';
@@ -17,6 +17,10 @@ describe('Board', () => {
     onMouseEnter: vi.fn(),
     onMouseUp: vi.fn(),
   };
+
+  beforeEach(() => {
+    vi.clearAllMocks();
+  });
 
   it('renders all letters', () => {
     render(<Board {...defaultProps} />);
@@ -49,11 +53,19 @@ describe('Board', () => {
   });
 
   it('passes selected state to letters', () => {
-    // Found word A-B
     const foundPaths = [[{ row: 0, col: 0 }, { row: 0, col: 1 }]];
     render(<Board {...defaultProps} foundWordPaths={foundPaths} />);
 
     const letterA = screen.getByTestId('letter-0-0');
-    expect(letterA).toHaveClass('letter--selected'); // Assuming Letter implementation applies this class
+    expect(letterA).toHaveClass('letter--selected');
   });
+
+  it('handles touch end on board', () => {
+    render(<Board {...defaultProps} />);
+    fireEvent.touchEnd(screen.getByTestId('board'));
+    expect(defaultProps.onMouseUp).toHaveBeenCalled();
+  });
+
+  // Note: Detailed touch move testing with elementFromPoint requires complex mocking of DOM APIs not fully supported in jsdom default.
+  // We can mock document.elementFromPoint.
 });

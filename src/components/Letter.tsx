@@ -20,6 +20,8 @@ export function Letter({
     <div
       className={classes}
       data-testid={`letter-${position.row}-${position.col}`}
+      data-row={position.row}
+      data-col={position.col}
       onMouseDown={() => onMouseDown(position)}
       onMouseEnter={() => onMouseEnter(position)}
     >

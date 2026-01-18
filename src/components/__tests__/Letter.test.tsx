@@ -38,4 +38,11 @@ describe('Letter', () => {
     fireEvent.mouseEnter(screen.getByTestId('letter-0-0'));
     expect(defaultProps.onMouseEnter).toHaveBeenCalledWith({ row: 0, col: 0 });
   });
+
+  it('has data attributes for touch handling', () => {
+    render(<Letter {...defaultProps} />);
+    const el = screen.getByTestId('letter-0-0');
+    expect(el).toHaveAttribute('data-row', '0');
+    expect(el).toHaveAttribute('data-col', '0');
+  });
 });
